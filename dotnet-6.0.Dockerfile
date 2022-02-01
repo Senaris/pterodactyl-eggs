@@ -5,7 +5,7 @@
 FROM mcr.microsoft.com/dotnet/runtime:6.0 AS base
 MAINTAINER Indungi Services SRL, <senarisk@gmail.com>
 
-RUN apt update && apt upgrade -y
+RUN apt update
 RUN apt install -y curl ca-certificates openssl git tar zip unzip bash fontconfig wget
 RUN apt install -y dos2unix
 RUN apt install -y sqlite3
