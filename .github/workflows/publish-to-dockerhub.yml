@@ -4,7 +4,7 @@ on:
     branches: [ master ]
     
 jobs:
-  build:
+  build-5.0:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -20,7 +20,7 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v1
         
-      - name: Build dotnet egg for debian
+      - name: Build dotnet egg for dotnet 5.0
         id: docker_build_debian
         uses: docker/build-push-action@v2
         with:
@@ -28,12 +28,12 @@ jobs:
           file: ./dotnet-5.0.Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/eggs:dotnet-5.0
-          
-      - name: Build dotnet egg for alpine
-        id: docker_build_alpine
+
+      - name: Build dotnet egg for dotnet 6.0
+        id: docker_build_debian
         uses: docker/build-push-action@v2
         with:
           context: ./
-          file: ./dotnet-5.0-alpine.Dockerfile
+          file: ./dotnet-6.0.Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/eggs:dotnet-5.0-alpine
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/eggs:dotnet-6.0

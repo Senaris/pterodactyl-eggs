@@ -2,7 +2,7 @@
 # Pterodactyl .NET Core 5.0 Pterodactyl Image DockerFile
 # Environment: Linux
 # ----------------------------------
-FROM mcr.microsoft.com/dotnet/runtime:5.0 AS base
+FROM mcr.microsoft.com/dotnet/runtime:6.0 AS base
 MAINTAINER Indungi Services SRL, <senarisk@gmail.com>
 
 RUN apt update && apt upgrade -y
