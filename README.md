@@ -4,4 +4,4 @@ Pterodactyl Eggs which have as a base 'dotnet' for various Console Applications 
 
 To use:
 - senaris/dotnet-5.0:latest > If you want to use Debian as a OS
-- senaris/dotnet-5.0-alpine:latest > If you want to use Alpine as OS
+- senaris/dotnet-6.0:latest > .net 6.0
