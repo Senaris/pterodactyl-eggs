@@ -8,7 +8,7 @@ MAINTAINER Indungi Services SRL, <senarisk@gmail.com>
 RUN apt update && apt upgrade -y
 RUN apt install -y curl ca-certificates openssl git tar zip unzip bash fontconfig wget
 RUN apt install -y dos2unix
-RUN apt install -y sqlite3 libsqlite3-dev libmariadbclient-dev
+RUN apt install -y sqlite3
 RUN apt install -y locales
 RUN dpkg-reconfigure --frontend noninteractive locales
 RUN useradd -m -d /home/container -s /bin/bash container
