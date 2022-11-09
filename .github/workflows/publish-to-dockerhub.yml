@@ -37,3 +37,12 @@ jobs:
           file: ./dotnet-6.0.Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/eggs:dotnet-6.0
+
+      - name: Build dotnet egg for dotnet 7.0
+        id: docker_build_debian7
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./dotnet-7.0.Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/eggs:dotnet-7.0
