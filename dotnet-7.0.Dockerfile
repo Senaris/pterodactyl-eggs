@@ -1,21 +1,34 @@
-FROM        --platform=$TARGETOS/$TARGETARCH ghcr.io/parkervcp/yolks:debian
+# ----------------------------------
+# Pterodactyl .NET Core 7.0 Pterodactyl Image DockerFile
+# Environment: Linux
+# ----------------------------------
+FROM mcr.microsoft.com/dotnet/runtime:7.0 AS base
+MAINTAINER Indungi Services SRL, <senarisk@gmail.com>
 
-LABEL       author="Tita Junior-Radu" maintainer="senarisk@gmail.com"
+RUN apt update
+RUN apt install -y curl ca-certificates openssl git tar zip unzip bash fontconfig wget
+RUN apt install -y dos2unix
+RUN apt install -y sqlite3
+RUN apt install -y locales
+RUN dpkg-reconfigure --frontend noninteractive locales
+RUN useradd -m -d /home/container -s /bin/bash container
+				
+RUN apt -y install dos2unix
 
-ENV         DEBIAN_FRONTEND noninteractive
+COPY ./entrypoint.sh entrypoint.sh
+COPY ./entrypoint.sh /home/container/entrypoint.sh
 
-RUN         apt update -y \
-            && apt upgrade -y \
-            && apt install -y apt-transport-https wget iproute2 \
-            && wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
-            && dpkg -i packages-microsoft-prod.deb \
-            && rm packages-microsoft-prod.deb \
-            && apt update -y \
-            && apt install -y aspnetcore-runtime-7.0 libgdiplus
+RUN dos2unix entrypoint.sh
+RUN dos2unix /home/container/entrypoint.sh
+RUN chmod +x /home/container/entrypoint.sh
+RUN chmod +x entrypoint.sh
 
-USER        container
-ENV         USER=container HOME=/home/container
-WORKDIR     /home/container
+#ENV         DEBIAN_FRONTEND noninteractive
 
-COPY        ./../entrypoint.sh /entrypoint.sh
-CMD         [ "/bin/bash", "/entrypoint.sh" ]
+WORKDIR /home/container
+
+USER container
+ENV  USER=container HOME=/home/container
+
+
+ENTRYPOINT ["/entrypoint.sh"]
